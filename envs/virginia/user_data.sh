@@ -37,16 +37,3 @@ dnf install -y docker
 systemctl enable --now docker
 usermod -aG docker ec2-user
 
-docker pull bjisu/gfs-backend:latest
-docker rm -f backend || true
-docker run -d \
-  --name gfs-backend \
-  --restart unless-stopped \
-  -p 8080:8080 \
-  -e SPRING_DATASOURCE_URL="jdbc:mysql://gfs-seoul-db.cluster-cracikk66wsw.ap-northeast-2.rds.amazonaws.com:3306/app" \
-  -e SPRING_DATASOURCE_USERNAME="admin" \
-  -e SPRING_DATASOURCE_PASSWORD="gfsproject5041!" \
-  -e SQS_QUEUE_URL="https://sqs.ap-northeast-2.amazonaws.com/132203050607/gfs-seoul-job-queue" \
-  -e REDIS_HOST="gfs-seoul-redis.t1u8nd.ng.0001.apn2.cache.amazonaws.com:6379" \
-  -e AWS_REGION="ap-northeast-2" \
-  bjisu/gfs-backend:latest

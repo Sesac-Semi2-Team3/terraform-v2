@@ -35,14 +35,8 @@ variable "rds_subnets" {
 
 variable "use_existing_nat_gateway" {
   type    = bool
-  default = true
+  default = false
 }
-
-variable "existing_nat_gateway_id" {
-  type    = string
-  default = null
-}
-
 ####################
 # Security Group
 ####################
